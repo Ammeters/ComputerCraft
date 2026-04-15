@@ -2,9 +2,12 @@ local function dropall(item)
     local count = 0
     for i = 1, 11, 1 do
         turtle.select(i)
-        if turtle.getItemDetail()["name"] == item then
-            turtle.drop()
-            count = count + 1
+        temp = turtle.getItemDetail()["name"]
+        if temp ~= nil then
+            if temp == item then
+                turtle.drop()
+                count = count + 1
+            end
         end
     end
     return count
