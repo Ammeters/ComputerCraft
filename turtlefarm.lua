@@ -2,9 +2,9 @@ local function dropall(item)
     local count = 0
     for i = 1, 11, 1 do
         turtle.select(i)
-        temp = turtle.getItemDetail()["name"]
+        local temp = turtle.getItemDetail()
         if temp ~= nil then
-            if temp == item then
+            if temp["name"] == item then
                 turtle.drop()
                 count = count + 1
             end
@@ -35,12 +35,7 @@ local function burnallbut(item)
     turtle.turnRight()
     turtle.forward()
     redstone.setOutput("front", true)
-        for i = 1, 11, 1 do
-        turtle.select(i)
-            if turtle.getItemDetail()["name"] == item then
-            turtle.drop()
-            end
-        end
+    dropall(item)
     redstone.setOutput("front", false) 
     turtle.turnRight()
     turtle.turnRight()
@@ -109,8 +104,11 @@ end
 local function store(item)
     for i = 1, 11, 1 do
         turtle.select(i)
-        if turtle.getItemDetail()["name"] == item then
-            turtle.dropDown()
+        local temp = turtle.getItemDetail()
+        if temp ~= nil then
+            if temp["name"] == item then
+                turtle.dropDown()
+            end
         end
     end
 end
