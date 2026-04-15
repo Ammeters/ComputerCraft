@@ -1,6 +1,6 @@
 local function dropall(item)
     local count = 0
-    for i = 1, 11, 1 do
+    for i = 1, 16, 1 do
         turtle.select(i)
         local temp = turtle.getItemDetail()
         if temp ~= nil then
@@ -45,28 +45,29 @@ end
 local function blow(type, item)
     turtle.turnLeft()
     turtle.forward()
-    turtle.forward()
-    turtle.forward()
-    turtle.forward()
-    turtle.select(type)
-    turtle.place()
     turtle.turnLeft()
     turtle.forward()
     turtle.forward()
     turtle.turnRight()
+    turtle.forward()
+    turtle.forward()
+    turtle.forward()
+    for i=0, type, 1 do
+        turtle.up()
+    end
     dropall(item)
     sleep(31)
     suckall()
-    turtle.select(2)
-    turtle.turnRight()
-    turtle.forward()
-    turtle.forward()
+    for i=0, type, 1 do
+        turtle.down()
+    end
+    turtle.back()
+    turtle.back()
+    turtle.back()
     turtle.turnLeft()
-    turtle.select(type)
-    turtle.place()
     turtle.back()
     turtle.back()
-    turtle.back()
+    turtle.turnRight()
     turtle.back()
     turtle.turnRight()
 end
@@ -102,7 +103,7 @@ local function getstone(n)
 end
 
 local function store(item)
-    for i = 1, 11, 1 do
+    for i = 1, 16, 1 do
         turtle.select(i)
         local temp = turtle.getItemDetail()
         if temp ~= nil then
@@ -120,8 +121,8 @@ while true do
     crush("minecraft:cobblestone")
     crush("minecraft:gravel")
     burnallbut("minecraft:sand")
-    blow(15, "minecraft:sand")
-    blow(12, "minecraft:soul_sand")
+    blow(0, "minecraft:sand")
+    blow(2, "minecraft:soul_sand")
     burnallbut("minecraft:quartz")
     store("minecraft:quartz")
     refuel()
