@@ -1,10 +1,10 @@
-local function dropall(item)
+local function dropall(item, invert)
     local count = 0
     for i = 1, 16, 1 do
         turtle.select(i)
         local temp = turtle.getItemDetail()
         if temp ~= nil then
-            if temp["name"] == item then
+            if (temp["name"] == item) ~= invert then
                 turtle.drop()
                 count = count + 1
             end
@@ -35,7 +35,7 @@ local function burnallbut(item)
     turtle.turnRight()
     turtle.forward()
     redstone.setOutput("front", true)
-    dropall(item)
+    dropall(item, true)
     redstone.setOutput("front", false) 
     turtle.turnRight()
     turtle.turnRight()
@@ -52,13 +52,13 @@ local function blow(type, item)
     turtle.forward()
     turtle.forward()
     turtle.forward()
-    for i=0, type, 1 do
+    for i=0, type-1, 1 do
         turtle.up()
     end
-    dropall(item)
+    dropall(item, false)
     sleep(31)
     suckall()
-    for i=0, type, 1 do
+    for i=0, type-1, 1 do
         turtle.down()
     end
     turtle.back()
@@ -79,7 +79,7 @@ local function crush(item)
     turtle.forward()
     turtle.up()
     turtle.up()
-    local count = dropall(item)
+    local count = dropall(item, false)
     turtle.down()
     turtle.down()
     sleep((7*count)+1)
@@ -117,7 +117,8 @@ end
 --program here
 
 while true do
-    getstone(4)
+    turtle.select(1)
+    getstone(8)
     crush("minecraft:cobblestone")
     crush("minecraft:gravel")
     burnallbut("minecraft:sand")
