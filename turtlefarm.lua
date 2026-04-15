@@ -86,3 +86,40 @@ local function crush(item)
     sleep((7*count)+1)
     suckall()
 end
+
+local function getstone(n)
+    turtle.forward()
+    turtle.forward()
+    turtle.turnRight()
+    for i=1, n, 1 do
+        turtle.suck()
+    end
+    turtle.turnLeft()
+    turtle.back()
+    turtle.back()
+end
+
+local function store(item)
+    for i = 1, 11, 1 do
+        turtle.select(i)
+        if turtle.getItemDetail() == item then
+            turtle.dropDown()
+        end
+    end
+end
+
+--program here
+
+while true do
+    getstone(4)
+    crush("minecraft:cobblestone")
+    crush("minecraft:gravel")
+    burnallbut("minecraft:sand")
+    blow(15, "minecraft:sand")
+    blow(12, "minecraft:soul_sand")
+    burnallbut("minecraft:quartz")
+    store("minecraft:quartz")
+    refuel()
+
+end
+
