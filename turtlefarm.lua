@@ -85,6 +85,10 @@ local function crush(item)
     turtle.down()
     sleep((7*count)+1)
     suckall()
+    turtle.back()
+    turtle.back()
+    turtle.back()
+    turtle.back()
 end
 
 local function getstone(n)
